@@ -3,24 +3,25 @@
 #best day to buy and the best day to sell. Days start at 0.
 
 def stock_picker stocks
-  buy_stock = stocks.length
-  sell_stock = stocks.length
+  stock_picks = Array.new(2, 0)
+  profit = stock_picks[1] - stock_picks[0]
 
-  stocks.each do |price|
-    if price < buy_stock
-      buy_stock = price
-      puts "Buy stock! #{buy_stock}"
-    elsif price > sell_stock
-      sell_stock = price
-      puts "Sell stock! #{sell_stock}"
-    else
-      puts "Hold stock"
+  stocks.each_with_index do |purchase_price, purchase_day|
+    stocks.each_with_index do |sale_price, sale_day|
+      max_profit = sale_price - purchase_price
+
+      if max_profit > profit
+        if purchase_price != stocks.last && sale_price != stocks.first
+          if purchase_day < sale_day
+            profit = max_profit
+            stock_picks = [purchase_day, sale_day]
+          end
+        end
+      end
     end
   end
 
-  puts "Buy Price: #{buy_stock}"
-  puts "Sell Price: #{sell_stock}"
-
+  puts stock_picks
 end
 
 stock_picker([17,3,6,9,15,8,6,1,10])
