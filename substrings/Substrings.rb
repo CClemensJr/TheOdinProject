@@ -4,7 +4,10 @@
 # in the original string and how many times it was found.
 
 def substrings word, dictionary
-  list_of_substrings = {word => dictionary.count(word)}
+  list_of_substrings = Hash.new
+
+  dictionary.each { |string| list_of_substrings[string] = dictionary.count(string) if word.include?(string) }
+
   puts list_of_substrings
 
 end
