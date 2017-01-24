@@ -4,14 +4,22 @@
 #wouldn't it?).
 
 def bubble_sort arr
-  (0..arr.length - 1).each do |i|
-    puts "i = #{arr[i]} i + 1 = #{arr[i + 1]}"
-    if arr[i] > arr[i + 1]
-      arr[i], arr[i + 1] = arr[i + 1], arr[i]
+  arr.each do
+    (0...arr.length).each do |i|
+      if arr[i + 1] == nil
+        break
+      elsif arr[i] > arr[i + 1]
+        puts "#{arr[i]} is bigger than #{arr[i + 1]} and sorting is needed\n"
 
-      puts "Now sorted i = #{arr[i]} i + 1 = #{arr[i + 1]} "
+        arr[i], arr[i + 1] = arr[i + 1], arr[i]
+
+        puts "#{arr[i]} is now less than #{arr[i + 1]}. Sorting completed.\n"
+      else
+        puts "#{arr[i]} is less than #{arr[i + 1]} and sorting is not needed\n"
+      end
     end
   end
+  p arr
 end
 
 bubble_sort([3, 2, 9, 6, 5])
