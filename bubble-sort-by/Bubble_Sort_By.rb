@@ -7,7 +7,20 @@
 # means the left element is greater. Use this to sort your array.
 
 def bubble_sort_by arr
-  puts "Array to be sorted."
+  max_passes = arr.size - 1
+  pass = 1
+
+  while pass <= max_passes do
+    (0...max_passes).each do |i|
+      if arr[i] > arr[i + 1]
+        arr[i], arr[i + 1] = arr[i + 1], arr[i]
+
+        pass += 1
+      end
+    end
+  end
+
+  p arr
 end
 
 bubble_sort_by(["hi", "hello", "hey"]) { |left, right| left.length - right.length }
