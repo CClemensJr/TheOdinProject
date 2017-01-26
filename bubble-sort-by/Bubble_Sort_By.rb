@@ -10,11 +10,27 @@ def bubble_sort_by arr
   max_passes = arr.size - 1
   pass = 1
 
-  while pass <= max_passes do
-    (0...max_passes).each do |i|
-      if arr[i] > arr[i + 1]
-        arr[i], arr[i + 1] = arr[i + 1], arr[i]
+  #bubble_sort_array = (0...max_passes).each do |i|
+  #  if arr[i] > arr[i + 1]
+  #    arr[i], arr[i + 1] = arr[i + 1], arr[i]
+  #    pass += 1
+  #  end
+  #end
 
+  while pass <= max_passes do
+  #  if sort_style < 0
+  #    puts "Sort_Style = #{sort_style} Ascending"
+  #    bubble_sort_array
+  #  elsif sort_style > 0
+  #    puts "Sort_Style = #{sort_style} Descending"
+  #    bubble_sort_array.reverse!
+  #  end
+    (0...max_passes).each do |i|
+      if yield(arr[i], arr[i + 1]) > 0
+        arr[i], arr[i + 1] = arr[i + 1], arr[i]
+        pass += 1
+      elsif yield(arr[i], arr[i + 1]) < 0 && arr[i + 2] != nil
+        arr[i + 1], arr[i + 2] = arr[i + 2], arr[i + 1]
         pass += 1
       end
     end
@@ -23,4 +39,10 @@ def bubble_sort_by arr
   p arr
 end
 
-bubble_sort_by(["hi", "hello", "hey"]) { |left, right| left.length - right.length }
+bubble_sort_by(["hi", "hello", "hey"]) do |left, right|
+  left.length - right.length
+end
+
+#bubble_sort_by([1, 7, 3]) do |left, right|
+#  left.length - right.length
+#end
