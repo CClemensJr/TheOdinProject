@@ -24,9 +24,13 @@ module Enumerable
   # Create #my_select in the same way, though you may use #my_each in your
   # definition (but not #each).
   def my_select
-    #insert code here
+    arr = []
+
+    self.my_each { |x| arr << x if yield x }
+
+    p arr
   end
 
 end
 
-[0, 2, 4, 5].my_each_with_index { |value, index| puts "value: #{value}, index: #{index}" }
+[0, 2, 4, 5].my_select { |x| x.even? }
