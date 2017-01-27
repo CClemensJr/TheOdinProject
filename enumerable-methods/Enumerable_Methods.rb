@@ -16,6 +16,11 @@ module Enumerable
     0.upto(self.length - 1) { |x| yield(self[x]) }
   end
 
+  # Create #my_each_with_index in the same way.
+  def my_each_with_index
+    0.upto(self.length - 1) { |x, y| yield(self[x], x) }
+  end
+
 end
 
-[0, 2, 4, 5].my_each { |i| puts i }
+[0, 2, 4, 5].my_each_with_index { |value, index| puts "value: #{value}, index: #{index}" }
