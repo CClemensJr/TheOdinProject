@@ -16,10 +16,12 @@ module Enumerable
     0.upto(self.length - 1) { |x| yield(self[x]) }
   end
 
+
   # Create #my_each_with_index in the same way.
   def my_each_with_index
     0.upto(self.length - 1) { |x, y| yield(self[x], x) }
   end
+
 
   # Create #my_select in the same way, though you may use #my_each in your
   # definition (but not #each).
@@ -29,6 +31,12 @@ module Enumerable
     self.my_each { |x| arr << x if yield x }
 
     p arr
+  end
+
+
+  # Create #my_all? (continue as above)
+  def my_all
+    #insert code here
   end
 
 end
