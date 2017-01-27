@@ -21,6 +21,12 @@ module Enumerable
     0.upto(self.length - 1) { |x, y| yield(self[x], x) }
   end
 
+  # Create #my_select in the same way, though you may use #my_each in your
+  # definition (but not #each).
+  def my_select
+    #insert code here
+  end
+
 end
 
 [0, 2, 4, 5].my_each_with_index { |value, index| puts "value: #{value}, index: #{index}" }
