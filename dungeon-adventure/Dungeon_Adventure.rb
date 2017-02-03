@@ -8,6 +8,10 @@ class Dungeon
     @player = player
     @rooms = {}
   end
+
+  def add_room(reference, name, description, connections)
+    @rooms[reference] = Room.new(reference, name, description, connections)
+  end
 end
 
 #lets player object keep track of player name and location
