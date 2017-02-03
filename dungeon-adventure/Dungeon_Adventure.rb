@@ -1,5 +1,6 @@
 # A simple text adventure game
 
+# keeps track of player and a list of rooms
 class Dungeon
   attr_accessor :player
 
@@ -9,21 +10,9 @@ class Dungeon
   end
 end
 
-class Player
-  attr_accessor :name, :location
+#lets player object keep track of player name and location
+Player = Struct.new(:name, :location)
 
-  def initialize(player_name)
-    @name = player_name
-  end
-end
-
-class Room
-  attr_accessor :reference, :name, :description, :connections
-
-  def initialize(reference, name, description, connections)
-    @reference = reference
-    @name = name
-    @description = description
-    @connections  = connections
-  end
-end
+#lets room objects store room name, description, connection to other rooms
+# and a reference, to be used by other rooms for their connections
+Room = Struct.new(:reference, :name, :description, :connection)
