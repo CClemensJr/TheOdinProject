@@ -1,4 +1,10 @@
-# A simple text adventure game
+# A skeleton for a simple text adventure game
+
+# *****CHALLENGE: With another class and several more methods add support
+# *****for items within the game that is placed in different locations,
+# *****picked up, and then drop at other locations. Use a loop that uses the
+# *****gets method to get input from the player and then to go wherever
+# *****the player determines
 
 # keeps track of player and a list of rooms
 class Dungeon
@@ -29,7 +35,7 @@ class Dungeon
   def find_room_in_direction(direction)
     find_room_in_dungeon(@player.location).connections[direction]
   end
-  
+
   def go(direction)
     puts "You go " + direction.to_s
     @player.location = find_room_in_direction(direction)
@@ -41,7 +47,7 @@ end
 class Player
   attr_accessor :name, :location
 
-  def initialize(name, location)
+  def initialize(name)
     @name = name
   end
 end
@@ -62,3 +68,24 @@ class Room
     @name + "\n\nYou are in " + @description
   end
 end
+
+player = Player.new("Chacha Lupa")
+my_dungeon = Dungeon.new(player)
+
+my_dungeon.add_room(:largecave,
+                    "Large Cave",
+                    "a large cavernous cave",
+                    { :west => :smallcave })
+
+my_dungeon.add_room(:smallcave,
+                    "Small Cave",
+                    "a small, claustrophobic cave",
+                    { :east => :largecave })
+
+my_dungeon.start(:largecave)
+
+my_dungeon.show_current_description
+
+my_dungeon.go(:west)
+
+my_dungeon.go(:east)

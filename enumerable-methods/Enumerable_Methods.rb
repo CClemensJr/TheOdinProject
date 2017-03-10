@@ -37,8 +37,9 @@ module Enumerable
   # Create #my_all? (continue as above)
   def my_all
     #insert code here
+    self.my_each { |x| return true if x != false || x != nil }
   end
 
 end
 
-[0, 2, 4, 5].my_select { |x| x.even? }
+["ant", "bear", "cat"].my_all { |x| x.length >=3 }
