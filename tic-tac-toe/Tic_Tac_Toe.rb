@@ -16,10 +16,11 @@ class Board
     @default_board = {space_one: " 1 ", space_two: " 2 ", space_three: " 3 ",
                       space_four: " 4 ", space_five: " 5 ", space_six: " 6 ",
                       space_seven: " 7 ", space_eight: " 8 ", space_nine: " 9 "}
-    @win_rows      = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-    @win_cols      = [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
-    @win_diags     = [[1, 5, 9], [3, 5, 7]]
     @win           = false
+    @rows_chkd     = "\nRows checked. "
+    @cols_chkd     = "\nColumns checked. "
+    @diags_chkd    = "\nDiagonals checked. "
+    @no_win_mssg   = "No winner yet!"
   end
 
 
@@ -91,10 +92,39 @@ class Board
 
   def make_a_move(player)
     @player = player
-    print "Player #{@player} make a move: "
+    print "\nPlayer #{@player} make a move: "
     @move = gets.chomp.to_i
+    puts ""
 
     update_board(@player, @move)
+  end
+
+
+  def check_columns(player)
+    if @default_board[:space_one]   == player &&
+       @default_board[:space_four]   == player &&
+       @default_board[:space_seven] == player
+
+        print @cols_chkd
+        win_message(player)
+        @win = true
+    elsif @default_board[:space_two] == player &&
+          @default_board[:space_five] == player &&
+          @default_board[:space_eight]  == player
+
+            print @cols_chkd
+            win_message(player)
+            @win = true
+    elsif @default_board[:space_three] == player &&
+          @default_board[:space_six] == player &&
+          @default_board[:space_nine]  == player
+
+            print @cols_chkd
+            win_message(player)
+            @win = true
+    else
+      puts "#{@cols_chkd} #{@no_win_mssg}"
+    end
   end
 
 
@@ -103,26 +133,61 @@ class Board
        @default_board[:space_two]   == player &&
        @default_board[:space_three] == player
 
+        puts @rows_chkd
+        win_message(player)
         @win = true
 
-        puts "Congratulations! Player#{player}won!"
     elsif @default_board[:space_four] == player &&
           @default_board[:space_five] == player &&
           @default_board[:space_six]  == player
 
+            puts @rows_chkd
+            win_message(player)
             @win = true
 
-            puts "Congratulations! Player#{player}won!"
-    elsif @default_board[:space_four] == player &&
-          @default_board[:space_five] == player &&
-          @default_board[:space_six]  == player
+    elsif @default_board[:space_seven] == player &&
+          @default_board[:space_eight] == player &&
+          @default_board[:space_nine]  == player
 
+            puts @rows_chkd
+            win_message(player)
             @win = true
 
-            puts "Congratulations! Player#{player}won!"
     else
-      puts "No wins yet!"
+
+      puts "#{@rows_chkd} #{@no_win_mssg}"
+
     end
+  end
+
+
+  def check_diagonals(player)
+    if @default_board[:space_one]   == player &&
+       @default_board[:space_five]   == player &&
+       @default_board[:space_nine] == player
+
+        puts @diags_chkd
+        win_message(player)
+        @win = true
+
+    elsif @default_board[:space_three] == player &&
+          @default_board[:space_five] == player &&
+          @default_board[:space_seven]  == player
+
+            puts @diags_chkd
+            win_message(player)
+            @win = true
+
+    else
+
+      puts "#{@diags_chkd} #{@no_win_mssg}"
+
+    end
+  end
+
+
+  def win_message(player)
+    puts "Congratulations! Player #{player} won!"
   end
 
 
@@ -132,8 +197,13 @@ class Board
     while @win == false
       make_a_move(" X ")
       check_rows(" X ")
+      check_columns(" X ")
+      check_diagonals(" X ")
+
       make_a_move(" O ")
       check_rows(" O ")
+      check_columns(" O ")
+      check_diagonals(" O ")
     end
   end
 
